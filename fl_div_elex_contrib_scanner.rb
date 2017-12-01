@@ -7,7 +7,7 @@
 }
 
 fl_doeDB = Sequel.connect( 
-	:adapter => 'mysql',
+	:adapter => 'mysql2',
 	:user=>ARGV[0], 
 	:password=>ARGV[1], 
 	:host=>ARGV[2],
