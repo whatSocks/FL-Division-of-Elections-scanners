@@ -34,7 +34,3 @@ ruby fl_div_elex_cmte_list_scanner.rb MYSQL_USERNAME MYSQL_PASSWORD MYSQL_HOST f
 ruby fl_div_elex_contrib_scanner.rb MYSQL_USERNAME MYSQL_PASSWORD MYSQL_HOST fl_cmpgn_contrib
 ruby fl_div_elex_exp_scanner.rb MYSQL_USERNAME MYSQL_PASSWORD MYSQL_HOST fl_cmpgn_exp2
 ```
-
-ruby fl_div_elex_cmte_list_scanner.rb root 12345 localhost fl_cmte_list
-ruby fl_div_elex_contrib_scanner.rb root 12345 localhost fl_cmpgn_contrib
-ruby fl_div_elex_exp_scanner.rb MYSQL_USERNAME MYSQL_PASSWORD MYSQL_HOST fl_cmpgn_exp2
