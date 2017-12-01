@@ -8,7 +8,7 @@
 }
 
 DB = Sequel.connect( 
-	:adapter => 'mysql',
+	:adapter => 'mysql2',
 	:user=>ARGV[0], 
 	:password=>ARGV[1], 
 	:host=>ARGV[2],
@@ -38,8 +38,9 @@ end
 fl_cmte_list = DB[:fl_cmte_list]
 
 url = 'http://election.dos.state.fl.us/committees/extractComList.asp'
-res = RestClient.post(url,{'FormSubmit'=>'Download'})
+res = RestClient.get(url)
 rows = res.split(/\r\n/)[1..-1]
+print res
 rows.each{|row| 
 	row_arr = row.split(/\t/)
 	begin
@@ -64,7 +65,8 @@ rows.each{|row|
 		)	
 		p row_arr		
 	rescue Exception => e
-		p "ERROR: #{e}"
+		# there's a lot of exeptions - need some help handling those
+		# p "ERROR: #{e}"
 		next
 	end
 }
