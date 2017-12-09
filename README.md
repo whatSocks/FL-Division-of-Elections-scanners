@@ -11,7 +11,11 @@ gem install bundler
 bundle install
 ```
 
-## Set up your database
+## Option 1: Straight to CSV
+
+Run `ruby cmte_csv_generator.rb`, `ruby contrib_csv_generator.rb`, and `ruby exp_csv_generator.rb` to gather committee, contributor, and expense information.
+
+## Option 2: Into a MySQL database
 
 This project uses MySQL. 
 If you don't have MySQL, download it here https://dev.mysql.com/downloads/mysql/
