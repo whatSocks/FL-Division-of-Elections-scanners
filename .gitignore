@@ -1,0 +1,6 @@
+output/*
+Gemfile.lock
+neo4j-community-3.3.1/*
+mega/*
+2016/*
+import.report

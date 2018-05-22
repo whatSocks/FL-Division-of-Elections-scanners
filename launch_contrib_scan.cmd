@@ -1,1 +1,0 @@
-ruby fl_div_elex_contrib_scanner.rb MYSQL_USERNAME MYSQL_PASSWORD MYSQL_HOST MYSQL_DATABASE_NAME
