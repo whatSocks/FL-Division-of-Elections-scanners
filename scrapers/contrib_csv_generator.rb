@@ -90,30 +90,31 @@ def getContributions(resultType, range, step, page, goodData, goodRegex, limited
   }
 end
 
-pastFrom = Date.commercial(1899,1,1)
-pastTo = Date.commercial(1996,1,1)
-pastRange = pastFrom..pastTo
-pastInterval = pastTo - pastFrom
+# pastFrom = Date.commercial(1899,1,1)
+# pastTo = Date.commercial(1996,1,1)
+# pastRange = pastFrom..pastTo
+# pastInterval = pastTo - pastFrom
 
-# modernFrom = Date.commercial(2016,1,1)
-# modernTo = Date.commercial(2016,52,1)
-# modernRange = modernFrom..modernTo
-# modernInterval = 7*2
+# just doing 2016 in this example, since the full dataset is too huge
+modernFrom = Date.commercial(2016,1,1)
+modernTo = Date.commercial(2016,52,1)
+modernRange = modernFrom..modernTo
+modernInterval = 7*2
 
-futureFrom = Date.commercial(2019,1,2)
-futureTo = Date.commercial(9920,1,1) # "oldest" contribution is in 12/31/9919
-futureRange = futureFrom..futureTo
-futureInterval = 7*52*1000
+# futureFrom = Date.commercial(2019,1,2)
+# futureTo = Date.commercial(9920,1,1) # "oldest" contribution is in 12/31/9919
+# futureRange = futureFrom..futureTo
+# futureInterval = 7*52*1000
 
 # candidate search is radio button 5
-getContributions(5, pastRange, pastInterval, page, candidatesCSV, candidatesRegex, limitedCandidatesCSV, limitedCandidatesRegex, investigateCSV)
-# getContributions(5, modernRange, modernInterval, page, candidatesCSV, candidatesRegex, limitedCandidatesCSV, limitedCandidatesRegex, investigateCSV)
-getContributions(5, futureRange, futureInterval, page, candidatesCSV, candidatesRegex, limitedCandidatesCSV, limitedCandidatesRegex, investigateCSV)
+# getContributions(5, pastRange, pastInterval, page, candidatesCSV, candidatesRegex, limitedCandidatesCSV, limitedCandidatesRegex, investigateCSV)
+getContributions(5, modernRange, modernInterval, page, candidatesCSV, candidatesRegex, limitedCandidatesCSV, limitedCandidatesRegex, investigateCSV)
+# getContributions(5, futureRange, futureInterval, page, candidatesCSV, candidatesRegex, limitedCandidatesCSV, limitedCandidatesRegex, investigateCSV)
 
 # committee search is radio button 10
-getContributions(10, pastRange, pastInterval, page, committeesCSV, committeesRegex, limitedCommitteesCSV, limitedCommitteesRegex, investigateCSV)
-# getContributions(10, modernRange, modernInterval, page, committeesCSV, committeesRegex, limitedCommitteesCSV, limitedCommitteesRegex, investigateCSV)
-getContributions(10, futureRange, futureInterval, page, committeesCSV, committeesRegex, limitedCommitteesCSV, limitedCommitteesRegex, investigateCSV)
+# getContributions(10, pastRange, pastInterval, page, committeesCSV, committeesRegex, limitedCommitteesCSV, limitedCommitteesRegex, investigateCSV)
+getContributions(10, modernRange, modernInterval, page, committeesCSV, committeesRegex, limitedCommitteesCSV, limitedCommitteesRegex, investigateCSV)
+# getContributions(10, futureRange, futureInterval, page, committeesCSV, committeesRegex, limitedCommitteesCSV, limitedCommitteesRegex, investigateCSV)
 
 candidatesCSV.close()
 limitedCandidatesCSV.close()

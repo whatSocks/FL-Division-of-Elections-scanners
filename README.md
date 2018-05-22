@@ -1,4 +1,4 @@
-# Florida Division of Elections scanners
+# Florida Division of Elections Scanners
 
 note:This is a side project and not as rigorous as it should be, yet. 
 
