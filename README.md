@@ -1,6 +1,6 @@
 # Florida Division of Elections Scanners
 
-note:This is a side project and not as rigorous as it should be, yet. 
+note: This is a side project and not as rigorous as it should be, yet. 
 
 These Ruby scripts scrape the Florida Division of Elections database for info on [campaign contributions](http://election.dos.state.fl.us/campaign-finance/contrib.asp). 
 Shoutout to the [Palm Beach Post](https://www.palmbeachpost.com/) for starting this project. 
@@ -26,7 +26,7 @@ The data will be organized for easy import into a Neo4j database, but you can na
 
 ## Option 2: Into a Neo4j database
 
-After importing the data to CSV, import it using the Neo4j import tool, then use `$NEO4J_HOME/bin/neo4j console` to start the database.
+After importing the data to CSV, import it using the Neo4j import tool (see below), then use `$NEO4J_HOME/bin/neo4j console` to start the database.
 
 ```
 $NEO4J_HOME/bin/neo4j-admin import --ignore-duplicate-nodes=true --ignore-extra-columns=true --id-type=STRING  --delimiter="\t" --ignore-missing-nodes --nodes:Candidate headers/candidateNodeHeader.csv,output/candidates.* --nodes:Committee headers/committeeNodeHeader.csv,output/committees.* --nodes:Contribution headers/contributionCo.csv,output/committees.*  --nodes:Contribution headers/contributionCa.csv,output/candidates.*  --nodes:Contributor headers/contributorCa.csv,output/candidates.* --nodes:Contributor headers/contributorCo.csv,output/committees.* --relationships:CONTRIBUTED headers/contributedCa.csv,output/candidates.* --relationships:CONTRIBUTED headers/contributedCo.csv,output/committees.* --relationships:SUPPORTS headers/supportsCo.csv,output/committees.* --relationships:SUPPORTS headers/supportsCa.csv,output/candidates.*
