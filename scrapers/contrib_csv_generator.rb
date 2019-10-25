@@ -53,7 +53,7 @@ def getContributions(resultType, range, step, page, goodData, goodRegex, limited
     doe_form['rowlimit'] = ''
 
     # particular committee name
-    doe_form['ComName'] = 'People United for Medical Marijuana'
+    # doe_form['ComName'] = 'Name Here'
 
     #city
     doe_form['ccity'] = 'BOCA RATON'
