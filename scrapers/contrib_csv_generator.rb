@@ -3,7 +3,7 @@ require 'mechanize'
 require 'date'
 require 'securerandom'
 
-contributionsListURL = 'http://election.dos.state.fl.us/campaign-finance/contrib.asp'
+contributionsListURL = 'https://dos.elections.myflorida.com/campaign-finance/contributions/'
 
 investigateCSV = File.open("output/investigate.csv", "w")
 
@@ -28,10 +28,11 @@ limitedCommitteesRegex = /(?<recipient>.+)\s\((?<recipientType>[A-Z]{3})\)\t(?<d
 agent = Mechanize.new
 
 begin
-  page = agent.get(contributionsListURL)
+  page = agent.post(contributionsListURL)
 rescue Exception => e
   p "ERROR: #{e}"
   p "RETRYING IN 30 SECONDS"
+  p "error 1"
   sleep 30
 retry
 end
@@ -41,6 +42,7 @@ def getContributions(resultType, range, step, page, goodData, goodRegex, limited
   puts "range: " + range.to_s
   range.step(step) {|date_step|
     doe_form = page.forms[0]
+
     # Search all elections in the DOE campaign finance database
     doe_form['election'] = 'All' 
 
@@ -49,6 +51,12 @@ def getContributions(resultType, range, step, page, goodData, goodRegex, limited
 
     # NO LIMIT on how many records the query returns
     doe_form['rowlimit'] = ''
+
+    # particular committee name
+    doe_form['ComName'] = 'People United for Medical Marijuana'
+
+    #city
+    doe_form['ccity'] = 'BOCA RATON'
 
     # Check off the button for downloading DOE results in tab - delimited file
     doe_form.radiobuttons[15].check
@@ -68,6 +76,7 @@ def getContributions(resultType, range, step, page, goodData, goodRegex, limited
     rescue Exception => e
       p "ERROR: #{e}"
       p "RETRYING IN 30 SECONDS"
+      p "error 2"
       sleep 30
     retry
     end
@@ -75,6 +84,7 @@ def getContributions(resultType, range, step, page, goodData, goodRegex, limited
     splitResults.each { |row|
       row.gsub!(/[\'|\"]/,'')
       match = row.match(goodRegex)
+      puts row
       if (match != nil) 
         goodData.write(SecureRandom.uuid + "\t" + match.to_a.drop(1).join("\t") + "\n")
       else
@@ -95,9 +105,9 @@ end
 # pastRange = pastFrom..pastTo
 # pastInterval = pastTo - pastFrom
 
-# just doing 2016 in this example, since the full dataset is too huge
-modernFrom = Date.commercial(2016,1,1)
-modernTo = Date.commercial(2016,52,1)
+# just doing 2018 in this example, since the full dataset is too huge
+modernFrom = Date.commercial(2018,1,1)
+modernTo = Date.commercial(2018,52,1)
 modernRange = modernFrom..modernTo
 modernInterval = 7*2
 
@@ -108,7 +118,7 @@ modernInterval = 7*2
 
 # candidate search is radio button 5
 # getContributions(5, pastRange, pastInterval, page, candidatesCSV, candidatesRegex, limitedCandidatesCSV, limitedCandidatesRegex, investigateCSV)
-getContributions(5, modernRange, modernInterval, page, candidatesCSV, candidatesRegex, limitedCandidatesCSV, limitedCandidatesRegex, investigateCSV)
+# getContributions(5, modernRange, modernInterval, page, candidatesCSV, candidatesRegex, limitedCandidatesCSV, limitedCandidatesRegex, investigateCSV)
 # getContributions(5, futureRange, futureInterval, page, candidatesCSV, candidatesRegex, limitedCandidatesCSV, limitedCandidatesRegex, investigateCSV)
 
 # committee search is radio button 10
